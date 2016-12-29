@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="true" />
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="multipleResultSetsEnabled" value="true" />
+		<setting name="useColumnLabel" value="true" />
+		<setting name="useGeneratedKeys" value="true" />
+		<setting name="defaultExecutorType" value="SIMPLE" />
+		<setting name="defaultStatementTimeout" value="25000" />
+	</settings>
+	<typeAliases>
+		<typeAlias type="com.model.Film" alias="Film" />
+	</typeAliases>
+	<mappers>
+	<!-- 	<mapper resource="./config_mybits/Film.xml" />   ./ 当前目录 -->
+	<!-- <package name="com.dao"/> --><!--批量 必须确保xml文件与对应的借口文件在同一个包 而且名字相同   ex:FilmDao.java  and FilmDao.xml -->
+	<mapper class="com.dao.FilmDao"/> <!--单个 必须确保xml文件与对应的借口文件在同一个包 而且名字相同   ex:FilmDao.java  and FilmDao.xml -->
+	</mappers>
+</configuration>
