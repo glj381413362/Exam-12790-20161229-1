@@ -29,7 +29,9 @@ public class CommandParser {
 			if (args[0].equals("exit")) {
 				MainApp.setExit(true);
 				return;
-			} else {
+			} else if (args[0].equals("tip")) {
+				handleTipCommand(args);
+			}else {
 				// 判断命令是否正确
 				Parser parserType = matchCommandType(args[0] + "Parser");// 返回解析器类型
 				// 拆分参数为key/value -like/args -id/args <s,e>/args 后面实现
@@ -46,19 +48,18 @@ public class CommandParser {
 					// 提示参数指令不正确
 					System.out.println("参数不足，或不正确");
 					if (args[0].equals("show")) {
-						System.out.println("模糊查询   show -like XXX  只写了模糊查询title");
-						System.out.println("更据id查询 show -id XX");
+						System.out.println("模糊查询   show -like aaa  只写了模糊查询title");
+						System.out.println("更据id查询 show -id 118");
 					}
 					if (args[0].equals("delete")) {
 						System.out.println("删除       delete -id XX");
 					}
 					if (args[0].equals("update")) {
-						System.out.println("更据id修改 update -id {字段名1：值1，字段名2：值2}必需包含id 不然修改失败 并提示");
-					}
+						System.out.println("更据id修改 update -id {filmId:222,title:值1,languageId:2}必需包含id 不然修改失败 并提示");
+						}
 					if (args[0].equals("insert")) {
-						System.out.println("单个插入   insert -single {字段名1：值1，字段名2：值2}包含id 如果数据库无该条记录 则能操作成功，否则失败，并提示 ");
-						System.out.println(
-								"insert -batch  [{title:值1,languageId:2,description:值3},{title:值1,languageId:值2,description:值3},...]");
+						System.out.println("单个插入   insert -single {title:值1,languageId:2,description:值3}包含id 如果数据库无该条记录 则能操作成功，否则失败，并提示 ");
+						System.out.println("批量插入   insert -batch  [{title:值1,languageId:2,description:值3},{title:值1,languageId:2,description:值3},...]");
 						System.out.println("字段必须位 title languageId description");
 					}
 				}
@@ -67,13 +68,41 @@ public class CommandParser {
 		} else {
 			System.out.println("命令错误");
 			System.out.println("正确命令：show delete update insert exit");
-			System.out.println("单个插入   insert -single {字段名1:值1,字段名2:值2}包含id 如果数据库无该条记录 则能操作成功，否则失败，并提示 ");
-			System.out.println("批量插入   insert -batch  [{title:值1,languageId:2,description:值3},{title:值1,languageId:值2,description:值3},...]");
+			System.out.println("单个插入   insert -single {title:值1,languageId:2,description:值3}包含id 如果数据库无该条记录 则能操作成功，否则失败，并提示 ");
+			System.out.println("批量插入   insert -batch  [{title:值1,languageId:2,description:值3},{title:值1,languageId:2,description:值3},...]");
 			System.out.println("字段必须位 title languageId description");
-			System.out.println("模糊查询   show -like XXX  只写了模糊查询title");
-			System.out.println("更据id查询 show -id XX");
-			System.out.println("更据id修改 update -id {字段名1：值1，字段名2：值2}必需包含id 不然修改失败 并提示");
+			System.out.println("模糊查询   show -like aaa  只写了模糊查询title");
+			System.out.println("更据id查询 show -id 118");
+			System.out.println("更据id修改 update -id {filmId:222,title:值1,languageId:2}必需包含id 不然修改失败 并提示");
 			System.out.println("删除       delete -id XX");
+		}
+	}
+
+	private void handleTipCommand(String[] args) {
+		if(args.length<2||args.length>2){
+			System.out.println("参数不足,或者过多");
+			System.out.println("tip show | tip delete | tip update | tip insert");
+		}else{
+			switch (args[1]) {
+			case "show":
+				System.out.println("模糊查询   show -like aaa  只写了模糊查询title");
+				System.out.println("更据id查询 show -id 118");
+				break;
+			case "delete":
+				System.out.println("删除       delete -id 125");
+				break;
+			case "update":
+				System.out.println("更据id修改 update -id {filmId:222,title:值1,languageId:2}必需包含id 不然修改失败 并提示");
+				break;
+			case "insert":
+				System.out.println("单个插入   insert -single {title:值1,languageId:2,description:值3}包含id 如果数据库无该条记录 则能操作成功，否则失败，并提示 ");
+				System.out.println("批量插入   insert -batch  [{title:值1,languageId:2,description:值3},{title:值1,languageId:2,description:值3},...]");
+				
+				break;
+
+			default:
+				break;
+			}
 		}
 	}
 
