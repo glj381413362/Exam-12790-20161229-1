@@ -66,7 +66,7 @@ public class CommandParser {
 
 		} else {
 			System.out.println("命令错误");
-			System.out.println("正确命令：show delete update insert");
+			System.out.println("正确命令：show delete update insert exit");
 			System.out.println("单个插入   insert -single {字段名1:值1,字段名2:值2}包含id 如果数据库无该条记录 则能操作成功，否则失败，并提示 ");
 			System.out.println("批量插入   insert -batch  [{title:值1,languageId:2,description:值3},{title:值1,languageId:值2,description:值3},...]");
 			System.out.println("字段必须位 title languageId description");
