@@ -32,7 +32,6 @@ public class Receiver {
 		List<Film> fList = null;
 	    fList = new InsertReceiver().getArgsCommandResult(filmService, argsMap);
 		if(fList!=null){
-			System.out.print("成功：");
 			printFilmList(fList);// 打印结果
 		}
 	}

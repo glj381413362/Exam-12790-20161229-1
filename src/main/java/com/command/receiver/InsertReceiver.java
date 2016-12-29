@@ -25,6 +25,10 @@ public class InsertReceiver {
 			switch (key) {
 			case "-single":
 				Film film = gson.fromJson(value, Film.class);
+				if(film.getLanguageId()==null){
+					film.setLanguageId(1);
+					System.out.println("languageId不能为空，以默认插入为1");
+				}
 				Short filmId = film.getFilmId();
 				if (filmId == null) {
 					filmService.insertSelectiveService(film);
