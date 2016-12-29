@@ -93,9 +93,6 @@
 		<foreach collection="list" item="item" index="index"
 			separator=",">
 			(
-			<if test="filmId != null">
-				#{filmId,jdbcType=SMALLINT},
-			</if>
 			#{item.title},
 			#{item.languageId},
 			#{item.description}

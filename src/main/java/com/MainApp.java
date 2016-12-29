@@ -15,8 +15,6 @@ public class MainApp {
 	private static AbstractApplicationContext aContext = new ClassPathXmlApplicationContext(
 			"config_spring/ApplicationContext.xml");
 	private static boolean isExit = false;
-	
-	
 	public static void main(String[] args) {
 		aContext.start();
 		while (!isExit) {
@@ -26,6 +24,9 @@ public class MainApp {
 			CommandManager commandManager = (CommandManager) aContext.getBean("commandManager");
 			commandManager.handle(in);
 		}
+		aContext.registerShutdownHook();
+		aContext.stop();
+		System.out.println("退出成功");
 	}
 	
 	public static void showMenu(){

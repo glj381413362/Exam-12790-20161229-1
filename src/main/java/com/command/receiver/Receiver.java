@@ -11,9 +11,9 @@ import com.model.Film;
 import com.service.IFilmService;
 
 //show命令接受者
-@Component("receiver")
+//@Component("receiver")  改用xml配置注入
 public class Receiver {
-	@Autowired
+//	@Autowired  改用xml配置注入
 	private IFilmService filmService;
 
 	public void showAction(Map<String, String> argsMap) {

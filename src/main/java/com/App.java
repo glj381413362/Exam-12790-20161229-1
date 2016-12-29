@@ -8,16 +8,9 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.dao.FilmDao;
-import com.event.AddFilmBean;
-import com.event.AddFilmEvent;
 import com.model.Film;
 import com.service.IFilmService;
 
@@ -40,7 +33,6 @@ public class App {
 		String op ;
 		switch (Integer.parseInt(in)) {
 		case 1:
-			AddFilmBean addFilmBean = (AddFilmBean) aContext.getBean("addFilmBean");
 			String inFilm = printString("请输入标题:(title,languageId)");
 			List<Film> fList = new ArrayList<Film>();
 			while (inFilm!=null&&!inFilm.equals(" ")&&inFilm.length()>0) {

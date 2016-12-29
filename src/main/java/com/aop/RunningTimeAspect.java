@@ -4,7 +4,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 //@Component
-//@Aspect
+//@Aspect  //改用xml配置
 public class RunningTimeAspect {
 //	@Pointcut("execution(* com.service.impl.*.*(..))")
 	public void runningTimeJointPointExpresion(){};

@@ -10,7 +10,8 @@ import org.springframework.validation.DirectFieldBindingResult;
 import org.springframework.validation.Errors;
 
 import com.dao.FilmDao;
-import com.event.AddFilmEvent;
+import com.event.AfterInsertFilmEvent;
+import com.event.BeforeInsertFilmEvent;
 import com.model.Film;
 import com.service.IFilmService;
 import com.validator.FilmValidator;
@@ -33,12 +34,14 @@ public class FilmServiceImpl implements IFilmService {
 
 	@Override
 	public int insertSelectiveService(Film film) {
+		applicationEventPublisher.publishEvent(new BeforeInsertFilmEvent("BeforeInsertFilmEvent"));
 		int res = 0;
 		synchronized (lock) {
 			if(filmDao.selectSingleByWhere(film)==null){
 				res = filmDao.insertSelective(film);;
 			}
 		}
+		if(res>0)applicationEventPublisher.publishEvent(new AfterInsertFilmEvent("AfterInsertFilmEvent"));
 		return res;
 	}
 	@Override
@@ -52,7 +55,7 @@ public class FilmServiceImpl implements IFilmService {
 	}
 	@Override
 	public Map<String, Boolean> batchInsertFilmService(List<Film> fList) {
-		applicationEventPublisher.publishEvent(new AddFilmEvent("另一种方法"));
+		applicationEventPublisher.publishEvent(new BeforeInsertFilmEvent("BeforeInsertFilmEvent"));
 		Map<String, Boolean> resultMap = new HashMap<String, Boolean>();
 		for(Film film : fList){
 			if (filmValidator.supports(film.getClass())) {
@@ -63,6 +66,7 @@ public class FilmServiceImpl implements IFilmService {
 				}else {
 					int res = insertSelectiveService(film);
 					boolean r = (res>0);
+					if(r)applicationEventPublisher.publishEvent(new AfterInsertFilmEvent("AfterInsertFilmEvent"));
 					resultMap.put(String.valueOf("Film "+film.getTitle()+" "+film.getLanguageId()), r);
 				}
 			}
