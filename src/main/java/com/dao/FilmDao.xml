@@ -83,11 +83,7 @@
 		#{lastUpdate,jdbcType=TIMESTAMP})
 	</insert>
 
-	<insert id="insertBatchFilm" parameterType="java.util.List">
-		<selectKey resultType="java.lang.Short" keyProperty="filmId"
-			order="AFTER">
-			SELECT LAST_INSERT_ID()
-		</selectKey>
+	<insert id="insertBatchFilm" parameterType="java.util.List"  useGeneratedKeys="true" keyProperty="filmId">
 		insert into film(title, language_id, description)
 		values
 		<foreach collection="list" item="item" index="index"

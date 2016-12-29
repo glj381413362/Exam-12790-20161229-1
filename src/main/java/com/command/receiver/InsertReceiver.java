@@ -28,7 +28,12 @@ public class InsertReceiver {
 				Short filmId = film.getFilmId();
 				if (filmId == null) {
 					filmService.insertSelectiveService(film);
-					fList.add(film);
+					if(film.getFilmId()==null)
+					{
+						System.out.println("重复插入，存在相同数据，插入失败");
+					}else{
+						fList.add(film);
+					}
 				} else if (filmService.selectByPrimaryKeyService(filmId) != null) {
 					System.out.println("该条记录已存在！");
 				} else {
@@ -39,13 +44,15 @@ public class InsertReceiver {
 			case "-batch":
 				List<Film> films = gson.fromJson(value, new TypeToken<List<Film>>() {
 				}.getType());
-				// Map<String, Boolean> resMap =
-				// filmService.insertBatchFilmService(films);
-				// printInsertResult(resMap);
 				int d = filmService.insertBatchFilmService(films);
-				System.out.println("ddd" + d);
-//				Map<String, String> listMap = getListMapToInsert(films);
-				
+				Iterator<Film > it = films.iterator();
+				while (it.hasNext()) {
+					Film film2 = (Film) it.next();
+					if(film2.getFilmId()!=null){
+						fList.add(film2);
+					}
+				}
+				System.out.println("插入"+d+"条记录成功");
 				break;
 			default:
 				break;

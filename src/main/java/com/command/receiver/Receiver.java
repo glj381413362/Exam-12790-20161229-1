@@ -50,7 +50,6 @@ public class Receiver {
 		List<Film> fList = null;
 	    fList = new UpdateReceiver().getArgsCommandResult(filmService, argsMap);
 		if(fList!=null){
-			System.out.print("成功：");
 			printFilmList(fList);// 打印结果
 		}
 	}
@@ -60,7 +59,7 @@ public class Receiver {
 			while (iterator.hasNext()) {
 				Film film = (Film) iterator.next();
 				if(film!=null)
-				System.out.println("电影ID:" + film.getFilmId() + "名称:" + film.getTitle());
+				System.out.println("电影ID:" + film.getFilmId() + " 名称:" + film.getTitle()+" 描述:" + film.getDescription() + " 语言:" + film.getLanguageId());
 			}
 		} else {
 			System.out.println("結果為空！");
