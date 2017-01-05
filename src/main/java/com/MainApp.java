@@ -13,7 +13,7 @@ import com.utils.ReadPropertiesUtils;
 
 public class MainApp {
 	private static AbstractApplicationContext aContext = new ClassPathXmlApplicationContext(
-			"config_spring/ApplicationContext.xml");
+			"classpath:config_spring/ApplicationContext.xml");
 	private static boolean isExit = false;
 	public static void main(String[] args) {
 		aContext.start();
